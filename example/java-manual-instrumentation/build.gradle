@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'io.opentelemetry:opentelemetry-sdk-extension-aws:1.6.0'
+    compile platform("io.opentelemetry:opentelemetry-bom:1.6.0")
+    compile('io.opentelemetry:opentelemetry-api')
+    //compile('io.opentelemetry:opentelemetry-sdk')
+    compile('com.logicmonitor:lm-opentelemetry-sdk:0.1.0-alpha') {
+        exclude group:"io.opentelemetry", module:"opentelemetry-sdk-extension-aws"
+    }
+    compile('io.opentelemetry:opentelemetry-exporter-otlp:1.6.0')
+    compile('io.opentelemetry:opentelemetry-semconv:1.6.0-alpha')
+    compile('io.grpc:grpc-netty-shaded:1.39.0')
+
+
+
+
+}
+
+
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.logicmonitor.example.TestApplication"
+    }
+}
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.1'
+    }
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+build.dependsOn shadowJar
+
+test {
+    useJUnitPlatform()
+}

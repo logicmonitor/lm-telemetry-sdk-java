@@ -1,0 +1,3 @@
+rootProject.name = 'lm-opentelemetry-sdk'
+include 'otel-resource'
+

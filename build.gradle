@@ -1,0 +1,50 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'com.diffplug.spotless' version '5.4.0'
+    id 'java-library'
+    id 'maven-publish'
+}
+apply from: "${scriptDir}/spotless.gradle"
+
+allprojects {
+    group = "com.logicmonitor"
+    version = "0.1.0-alpha"
+}
+ext {
+    versions = [
+            opentelemetry     : "1.6.0",
+            opentelemetryAlpha: "1.6.0-alpha",
+
+    ]
+}
+//build.dependsOn spotlessApply
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+
+    api project(':otel-resource')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    api group: "io.opentelemetry", name: "opentelemetry-sdk", version: "${versions.opentelemetry}"
+    implementation group: "io.opentelemetry", name: "opentelemetry-api", version: "${versions.opentelemetry}"
+    api group: "io.opentelemetry", name: "opentelemetry-sdk-extension-autoconfigure", version: "${versions.opentelemetryAlpha}"
+
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = 'lm-opentelemetry-sdk'
+            from components.java
+        }
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+}
+
