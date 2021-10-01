@@ -32,7 +32,6 @@ dependencies {
     api group: "io.opentelemetry", name: "opentelemetry-sdk", version: "${versions.opentelemetry}"
     implementation group: "io.opentelemetry", name: "opentelemetry-api", version: "${versions.opentelemetry}"
     api group: "io.opentelemetry", name: "opentelemetry-sdk-extension-autoconfigure", version: "${versions.opentelemetryAlpha}"
-
 }
 publishing {
     publications {
