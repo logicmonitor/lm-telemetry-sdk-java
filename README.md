@@ -1,4 +1,5 @@
 # **LM Java OpenTelemetry SDK**
+[![Java CI with Gradle][ci-image]][ci-url]
 
 LM Java OpenTelemetry SDK is a wrapper around OpenTelemetry SDK. If you are using LM OpenTelemetry SDK in the application then no need to add OpenTelemetry SDK dependency as it is fetched transitively.
 
@@ -69,5 +70,8 @@ List of OpenTelemetry Component Dependencies
 | [OpenTelemetry Resource Providers](https://github.com/open-telemetry/opentelemetry-java/tree/v1.6.0/sdk-extensions/resources)        | v<!--VERSION_STABLE-->1.6.0<!--/VERSION_STABLE-->  |
 
 
+
+[ci-image]: https://github.com/logicmonitor/lm-telemetry-sdk-java/actions/workflows/gradle.yml/badge.svg?branch=main
+[ci-url]: https://github.com/logicmonitor/lm-telemetry-sdk-java/actions/workflows/gradle.yml
 
 
