@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 public class LMResourceDetectorTest {
 
-    @Test
-    public void emptyResourceTest(){
-        Resource resource=LMResourceDetector.detect();
-        Assertions.assertEquals(ResourceAttributes.SCHEMA_URL,resource.getSchemaUrl());
-    }
+  @Test
+  public void emptyResourceTest() {
+    Resource resource = LMResourceDetector.detect();
+    Assertions.assertEquals(ResourceAttributes.SCHEMA_URL, resource.getSchemaUrl());
+  }
 }
