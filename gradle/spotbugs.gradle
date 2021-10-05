@@ -1,0 +1,24 @@
+// spotbugs
+
+apply plugin: 'com.github.spotbugs'
+
+spotbugs {
+  ignoreFailures = true
+  effort = 'max'
+  showProgress = true
+    reportsDir = file("${rootProject.projectDir}/build/reports/spotbugs/")
+}
+spotbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+spotbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+task spotbugs(dependsOn: [spotbugsMain, spotbugsTest])

@@ -2,14 +2,20 @@ plugins {
     id 'idea'
     id 'java'
     id 'com.diffplug.spotless' version '5.4.0'
+    id 'com.github.spotbugs' version '4.5.0' apply false
     id 'java-library'
     id 'maven-publish'
+    id 'jacoco'
 }
 apply from: "${scriptDir}/spotless.gradle"
+//apply from: "${scriptDir}/jacoco.gradle"
 
 allprojects {
+    apply plugin :'java'
     group = "com.logicmonitor"
     version = "0.1.0-alpha"
+
+    apply from: "${rootProject.projectDir}/gradle/spotbugs.gradle"
 }
 ext {
     versions = [
@@ -42,8 +48,26 @@ publishing {
     }
 }
 
-
 test {
     useJUnitPlatform()
 }
 
+
+task codeCoverageReport(type: JacocoReport) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    allprojects.each {
+        sourceSets it.sourceSets.main
+    }
+    reports {
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/report.xml")
+        html.enabled false
+        csv.enabled false
+    }
+}
+
+codeCoverageReport.dependsOn {
+    allprojects*.test
+
+}

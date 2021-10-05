@@ -34,7 +34,6 @@ public class LMEc2Resource {
     instanceId = resource.getAttribute(ResourceAttributes.HOST_ID);
     region = resource.getAttribute(ResourceAttributes.CLOUD_REGION);
     accountId = resource.getAttribute(ResourceAttributes.CLOUD_ACCOUNT_ID);
-
     if (instanceId != null && region != null && accountId != null) {
       AttributesBuilder attrBuilders = Attributes.builder();
       attrBuilders.put(ARN, String.format(AWS_ARN_FORMAT, region, accountId, instanceId));

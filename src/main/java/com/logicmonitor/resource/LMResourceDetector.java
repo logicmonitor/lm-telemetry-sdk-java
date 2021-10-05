@@ -7,4 +7,6 @@ public class LMResourceDetector {
   public static Resource detect() {
     return OpenTelemetryResourceAutoConfiguration.configureResource();
   }
+
+  private LMResourceDetector() {}
 }
