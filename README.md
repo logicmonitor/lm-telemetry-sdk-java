@@ -35,7 +35,7 @@ Resource serviceResource = LMResourceDetector.detect();
 
 //Create Span Exporter
 OtlpGrpcSpanExporter spanExporter = OtlpGrpcSpanExporter.builder()
-.setEndpoint("http://localhost:55680")
+.setEndpoint("http://localhost:4317")
 .build();
 
 //Create SdkTracerProvider
