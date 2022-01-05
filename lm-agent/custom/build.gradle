@@ -1,0 +1,25 @@
+plugins {
+    id "java"
+    id("com.github.johnrengelman.shadow") version "6.0.0"
+}
+
+apply from: "$rootDir/gradle/shadow.gradle"
+
+def relocatePackages = ext.relocatePackages
+
+dependencies {
+    compileOnly("io.opentelemetry:opentelemetry-sdk:${versions.opentelemetry}")
+    compileOnly("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure:${versions.opentelemetryAlpha}")
+    compileOnly("io.opentelemetry.javaagent:opentelemetry-javaagent-extension-api:${versions.opentelemetryJavaagentAlpha}")
+    implementation project(':otel-resource')
+}
+
+tasks {
+    shadowJar {
+        mergeServiceFiles()
+
+        exclude("**/module-info.class")
+
+        relocatePackages(it)
+    }
+}

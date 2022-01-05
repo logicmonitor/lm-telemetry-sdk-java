@@ -1,3 +1,13 @@
 rootProject.name = 'lm-opentelemetry-sdk'
 include 'otel-resource'
+include 'lm-agent'
+include 'custom'
+include 'lm-agent:custom'
+findProject(':lm-agent:custom')?.name = 'custom'
+include 'lm-agent:instrumentation'
+findProject(':lm-agent:instrumentation')?.name = 'instrumentation'
+include 'lm-agent:agent'
+findProject(':lm-agent:agent')?.name = 'agent'
+include 'lm-agent:smoke-tests'
+findProject(':lm-agent:smoke-tests')?.name = 'smoke-tests'
 

@@ -71,3 +71,6 @@ codeCoverageReport.dependsOn {
     allprojects*.test
 
 }
+compileJava {
+    options.release.set(8)
+}

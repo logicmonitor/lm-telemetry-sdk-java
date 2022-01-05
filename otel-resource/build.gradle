@@ -33,4 +33,6 @@ publishing {
 test {
     useJUnitPlatform()
 }
-
+compileJava {
+    options.release.set(8)
+}
