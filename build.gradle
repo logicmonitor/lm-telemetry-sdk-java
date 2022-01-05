@@ -16,6 +16,11 @@ allprojects {
     version = "0.1.0-alpha"
 
     apply from: "${rootProject.projectDir}/gradle/spotbugs.gradle"
+
+    compileJava {
+        options.release.set(8)
+    }
+
 }
 ext {
     versions = [
@@ -70,7 +75,4 @@ task codeCoverageReport(type: JacocoReport) {
 codeCoverageReport.dependsOn {
     allprojects*.test
 
-}
-compileJava {
-    options.release.set(8)
 }
