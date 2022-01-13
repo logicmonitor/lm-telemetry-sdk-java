@@ -39,8 +39,11 @@ tasks {
         mergeServiceFiles {
             include("inst/META-INF/services/*")
         }
+        processResources
         exclude("**/module-info.class")
-
+        exclude("**/META-INF/*.DSA")
+        exclude("**/META-INF/*.SF")
+        processResources
         relocatePackages(it)
 
         manifest {
@@ -58,5 +61,10 @@ tasks {
 
     assemble {
         dependsOn(shadowJar)
+    }
+    processResources {
+        from(rootProject.file("LICENSE")) {
+            into("META-INF/")
+        }
     }
 }
