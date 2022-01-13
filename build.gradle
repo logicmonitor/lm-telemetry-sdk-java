@@ -14,6 +14,9 @@ allprojects {
     group = "com.logicmonitor"
     version = "0.1.0-alpha"
 
+    compileJava {
+        options.release.set(8)
+    }
 }
 ext {
     versions = [

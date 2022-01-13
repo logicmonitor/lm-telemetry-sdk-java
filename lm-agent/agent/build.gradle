@@ -52,6 +52,7 @@ tasks {
             attributes.put("Implementation-Vendor", "LogicMonitor")
             attributes.put("Implementation-Version", "logicmonitor-${project.version}-otel-${versions.opentelemetryJavaagent}")
         }
+
         archiveBaseName ="lm-agent"
     }
 
