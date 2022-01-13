@@ -47,7 +47,4 @@ subprojects {
         }
 
     }
-    compileJava {
-        options.release.set(8)
-    }
 }
