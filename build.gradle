@@ -69,6 +69,11 @@ task codeCoverageReport(type: JacocoReport) {
 }
 
 codeCoverageReport.dependsOn {
-    allprojects*.test
+    getAllprojects()
+            .collect {
+                if(!it.name.equals("lm-agent")){
+                     return it.getTasksByName("test",true);
+                }
+            }.findAll();
 
 }
