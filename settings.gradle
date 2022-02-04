@@ -10,5 +10,4 @@ findProject(':lm-agent:agent')?.name = 'agent'
 include 'lm-agent:smoke-tests'
 findProject(':lm-agent:smoke-tests')?.name = 'smoke-tests'
 include 'lm-javaagent-layer'
-include 'lm-javaagent-layer'
 
