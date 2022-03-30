@@ -16,7 +16,6 @@ import org.mockito.Mockito;
 
 public class LMLambdaResourceProviderTest {
 
-  String CLOUD_ACCOUNT_ID = "148849749053";
   AWSSecurityTokenService client;
 
   @BeforeEach
@@ -31,21 +30,20 @@ public class LMLambdaResourceProviderTest {
   }
 
   @Test
-  public void whenProvidedValidLambdaResourceThenReturnResourceWithARN() {
+  public void whenProvidedValidLambdaResourceThenReturnResourceWithAccountId() {
     AttributesBuilder attrBuilders = Attributes.builder();
     attrBuilders.put(ResourceAttributes.CLOUD_REGION, "us-west-2");
-    attrBuilders.put(ResourceAttributes.CLOUD_ACCOUNT_ID, CLOUD_ACCOUNT_ID);
     attrBuilders.put(ResourceAttributes.FAAS_NAME, "java-instrumentation");
     attrBuilders.put(ResourceAttributes.FAAS_VERSION, "$LATEST");
 
     GetCallerIdentityResult getCallerIdentityResponse = new GetCallerIdentityResult();
-    getCallerIdentityResponse.setAccount(CLOUD_ACCOUNT_ID);
+    getCallerIdentityResponse.setAccount("148849749053");
     Mockito.when(client.getCallerIdentity(Mockito.any(GetCallerIdentityRequest.class)))
         .thenReturn(getCallerIdentityResponse);
 
     Resource lambdaResource = Resource.create(attrBuilders.build(), ResourceAttributes.SCHEMA_URL);
     Resource lmLambdaResource = LMLambdaResource.get(lambdaResource, client);
-    String faasId = lmLambdaResource.getAttribute(AttributeKey.stringKey("faas.id"));
-    assertEquals(faasId, "arn:aws:lambda:us-west-2:148849749053:function:java-instrumentation");
+    String accountId = lmLambdaResource.getAttribute(AttributeKey.stringKey("cloud.account.id"));
+    assertEquals(accountId, "148849749053");
   }
 }
