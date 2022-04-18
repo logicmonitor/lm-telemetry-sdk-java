@@ -37,13 +37,31 @@ public class LMLambdaResourceProviderTest {
     attrBuilders.put(ResourceAttributes.FAAS_VERSION, "$LATEST");
 
     GetCallerIdentityResult getCallerIdentityResponse = new GetCallerIdentityResult();
-    getCallerIdentityResponse.setAccount("148849749053");
+    getCallerIdentityResponse.setAccount("accountId");
     Mockito.when(client.getCallerIdentity(Mockito.any(GetCallerIdentityRequest.class)))
         .thenReturn(getCallerIdentityResponse);
 
     Resource lambdaResource = Resource.create(attrBuilders.build(), ResourceAttributes.SCHEMA_URL);
     Resource lmLambdaResource = LMLambdaResource.get(lambdaResource, client);
     String accountId = lmLambdaResource.getAttribute(AttributeKey.stringKey("cloud.account.id"));
-    assertEquals(accountId, "148849749053");
+    assertEquals(accountId, "accountId");
+  }
+
+  @Test
+  public void whenProvidedNullAccountId() {
+    AttributesBuilder attrBuilders = Attributes.builder();
+    attrBuilders.put(ResourceAttributes.CLOUD_REGION, "us-west-2");
+    attrBuilders.put(ResourceAttributes.FAAS_NAME, "java-instrumentation");
+    attrBuilders.put(ResourceAttributes.FAAS_VERSION, "$LATEST");
+
+    GetCallerIdentityResult getCallerIdentityResponse = new GetCallerIdentityResult();
+    getCallerIdentityResponse.setAccount(null);
+    Mockito.when(client.getCallerIdentity(Mockito.any(GetCallerIdentityRequest.class)))
+        .thenReturn(getCallerIdentityResponse);
+
+    Resource lambdaResource = Resource.create(attrBuilders.build(), ResourceAttributes.SCHEMA_URL);
+    Resource lmLambdaResource = LMLambdaResource.get(lambdaResource, client);
+    String accountId = lmLambdaResource.getAttribute(AttributeKey.stringKey("cloud.account.id"));
+    assertEquals(accountId, null);
   }
 }
