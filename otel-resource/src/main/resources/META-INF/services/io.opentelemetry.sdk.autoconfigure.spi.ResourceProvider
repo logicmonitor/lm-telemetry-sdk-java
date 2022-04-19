@@ -1,2 +1,3 @@
 com.logicmonitor.resource.detectors.aws.ec2.LMEc2ResourceProvider
 com.logicmonitor.resource.detectors.aws.lambda.LMLambdaResourceProvider
+com.logicmonitor.resource.detectors.common.LMCommonResourceProvider
