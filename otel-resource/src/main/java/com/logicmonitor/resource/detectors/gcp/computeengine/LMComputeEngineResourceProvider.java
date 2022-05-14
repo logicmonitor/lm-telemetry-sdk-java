@@ -1,4 +1,4 @@
-package com.logicmonitor.resource.detectors.gcp.computeengine;
+package com.logicmonitor.resource.detectors.gcp.computeEngine;
 
 import io.opentelemetry.sdk.autoconfigure.spi.ConfigProperties;
 import io.opentelemetry.sdk.autoconfigure.spi.ResourceProvider;
@@ -8,6 +8,6 @@ public class LMComputeEngineResourceProvider implements ResourceProvider {
 
   @Override
   public Resource createResource(ConfigProperties config) {
-    return LMComputeEngineResource.get();
+    return LMComputeEngineResource.get("http://metadata.google.internal");
   }
 }
