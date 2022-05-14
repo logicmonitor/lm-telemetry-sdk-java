@@ -24,16 +24,13 @@ public class LMEc2Resource {
   }
 
   static Resource buildResource(Resource resource) {
-    String accountId = "";
-    String region = "";
-    String instanceId = "";
     // if empty means it is not ec2
     if (resource == null || resource == Resource.empty()) {
       return Resource.empty();
     }
-    instanceId = resource.getAttribute(ResourceAttributes.HOST_ID);
-    region = resource.getAttribute(ResourceAttributes.CLOUD_REGION);
-    accountId = resource.getAttribute(ResourceAttributes.CLOUD_ACCOUNT_ID);
+    String instanceId = resource.getAttribute(ResourceAttributes.HOST_ID);
+    String region = resource.getAttribute(ResourceAttributes.CLOUD_REGION);
+    String accountId = resource.getAttribute(ResourceAttributes.CLOUD_ACCOUNT_ID);
     if (instanceId != null && region != null && accountId != null) {
       AttributesBuilder attrBuilders = Attributes.builder();
       attrBuilders.put(ARN, String.format(AWS_ARN_FORMAT, region, accountId, instanceId));

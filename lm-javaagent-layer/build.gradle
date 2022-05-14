@@ -1,0 +1,24 @@
+plugins {
+    id 'java-library'
+}
+
+task copyAgentJar(type: Copy, dependsOn: [':lm-agent:agent:shadowJar']) {
+    def srcPath = "$rootDir/lm-agent/agent/build/libs/lm-agent-$project.version-all.jar"
+    def targetPath = "$buildDir/libs"
+    from(srcPath)
+    into(targetPath)
+}
+
+task createlayer(type: Zip, dependsOn: ['copyAgentJar']) {
+    archiveFileName = 'lm-opentelemetry-javaagent-layer.zip'
+    destinationDirectory = file("$buildDir/distributions")
+    def srcPath = "$buildDir/libs"
+    from(srcPath) {
+        rename(".*.jar", "lm-javaagent.jar")
+    }
+    from 'script'
+}
+
+assemble {
+    dependsOn(createlayer)
+}
