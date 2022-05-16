@@ -21,15 +21,15 @@ public class LMComputeEngineResource {
       attrBuilders.put(
           ResourceAttributes.CLOUD_PLATFORM,
           ResourceAttributes.CloudPlatformValues.GCP_COMPUTE_ENGINE);
-      String hostId = getGcpResource(baseURL+"/computeMetadata/v1/instance/id");
+      String hostId = getGcpResource(baseURL + "/computeMetadata/v1/instance/id");
       if (hostId != null) {
         attrBuilders.put(ResourceAttributes.HOST_ID, hostId);
       }
-      String projectId = getGcpResource(baseURL+"/computeMetadata/v1/project/project-id");
+      String projectId = getGcpResource(baseURL + "/computeMetadata/v1/project/project-id");
       if (projectId != null) {
         attrBuilders.put(ResourceAttributes.CLOUD_ACCOUNT_ID, projectId);
       }
-      String zone = getGcpResource(baseURL+"/computeMetadata/v1/instance/zone");
+      String zone = getGcpResource(baseURL + "/computeMetadata/v1/instance/zone");
       if (zone != null) {
         attrBuilders.put(ResourceAttributes.CLOUD_AVAILABILITY_ZONE, zone);
       }
