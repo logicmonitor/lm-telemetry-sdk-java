@@ -8,22 +8,23 @@ import io.opentelemetry.sdk.resources.Resource;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes.CloudPlatformValues;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes.CloudProviderValues;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class LMAzureVMResourceProviderTest {
 
-  HttpClient httpClient;
-  HttpResponse mockedResponse;
+  OkHttpClient httpClient;
 
   @BeforeEach
   public void setUp() {
-    httpClient = Mockito.mock(HttpClient.class);
-    mockedResponse = Mockito.mock(HttpResponse.class);
+    httpClient = Mockito.mock(OkHttpClient.class);
   }
 
   @Test
@@ -32,25 +33,31 @@ public class LMAzureVMResourceProviderTest {
     attrBuilders.put(ResourceAttributes.CLOUD_PROVIDER, CloudProviderValues.AZURE);
     attrBuilders.put(ResourceAttributes.CLOUD_PLATFORM, CloudPlatformValues.AZURE_VM);
     attrBuilders.put("host.id", "hostId");
-    Mockito.when(mockedResponse.statusCode()).thenReturn(200);
-    Mockito.when(mockedResponse.body())
-        .thenReturn("{\n" + "  \"compute\" : {\n" + "    \"vmId\" : \"hostId\"\n" + "  }\n" + "}");
-    Mockito.when(
-            httpClient.send(
-                Mockito.any(HttpRequest.class), Mockito.any(HttpResponse.BodyHandler.class)))
-        .thenReturn(mockedResponse);
+    Call call = Mockito.mock(Call.class);
+    Mockito.when(httpClient.newCall(Mockito.any(Request.class))).thenReturn(call);
+    ResponseBody body =
+        ResponseBody.create(
+            null, "{\n" + "  \"compute\" : {\n" + "    \"vmId\" : \"hostId\"\n" + "  }\n" + "}");
+    Request request = new Request.Builder().url("http://dummysupport").build();
+    Protocol protocol = Protocol.get("http/1.1");
+    Response response =
+        new Response.Builder()
+            .body(body)
+            .request(request)
+            .protocol(protocol)
+            .code(200)
+            .message("OK")
+            .build();
+    Mockito.when(call.execute()).thenReturn(response);
+
     Resource azureVMResource = Resource.create(attrBuilders.build(), ResourceAttributes.SCHEMA_URL);
     Resource lmAzureVMResource = LMAzureVMResource.get(httpClient);
     assertEquals(azureVMResource, lmAzureVMResource);
   }
 
   @Test
-  public void whenProvidedInvalidResponse() throws Exception {
+  public void whenProvidedInvalidResponse() {
     AttributesBuilder attrBuilders = Attributes.builder();
-    Mockito.when(
-            httpClient.send(
-                Mockito.any(HttpRequest.class), Mockito.any(HttpResponse.BodyHandler.class)))
-        .thenReturn(mockedResponse);
     Resource azureVMResource = Resource.create(attrBuilders.build(), null);
     Resource lmAzureVMResource = LMAzureVMResource.get(httpClient);
     assertEquals(azureVMResource, lmAzureVMResource);

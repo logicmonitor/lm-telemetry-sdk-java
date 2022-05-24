@@ -16,14 +16,14 @@ public class LMComputeEngineResource {
   public static Resource get(String baseURL) {
     AttributesBuilder attrBuilders = Attributes.builder();
     if (System.getenv("K_SERVICE") == null) {
-      attrBuilders.put(
-          ResourceAttributes.CLOUD_PROVIDER, ResourceAttributes.CloudProviderValues.GCP);
-      attrBuilders.put(
-          ResourceAttributes.CLOUD_PLATFORM,
-          ResourceAttributes.CloudPlatformValues.GCP_COMPUTE_ENGINE);
       String hostId = getGcpResource(baseURL + "/computeMetadata/v1/instance/id");
       if (hostId != null) {
         attrBuilders.put(ResourceAttributes.HOST_ID, hostId);
+        attrBuilders.put(
+            ResourceAttributes.CLOUD_PROVIDER, ResourceAttributes.CloudProviderValues.GCP);
+        attrBuilders.put(
+            ResourceAttributes.CLOUD_PLATFORM,
+            ResourceAttributes.CloudPlatformValues.GCP_COMPUTE_ENGINE);
       }
       String projectId = getGcpResource(baseURL + "/computeMetadata/v1/project/project-id");
       if (projectId != null) {

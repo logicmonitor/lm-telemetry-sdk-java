@@ -6,11 +6,10 @@ import io.opentelemetry.sdk.resources.Resource;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes.CloudPlatformValues;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes.CloudProviderValues;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
+import java.net.URL;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,17 +19,16 @@ public class LMAzureVMResource {
   private static final Logger logger = LoggerFactory.getLogger(LMAzureVMResource.class);
   private static final String HOST_ID = "host.id";
 
-  static Resource get(HttpClient client) {
+  static Resource get(OkHttpClient client) {
     String azureVmId = null;
 
     try {
-      URI url = new URI("http://169.254.169.254/metadata/instance?api-version=2021-02-01");
-      HttpRequest request =
-          HttpRequest.newBuilder().uri(url).GET().header("Metadata", "true").build();
-      HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+      URL url = new URL("http://169.254.169.254/metadata/instance?api-version=2021-02-01");
+      Request request = new Request.Builder().url(url).get().header("Metadata", "true").build();
+      Response response = client.newCall(request).execute();
 
-      if (response.statusCode() == 200) {
-        JSONObject responseBody = new JSONObject(response.body());
+      if (response.code() == 200) {
+        JSONObject responseBody = new JSONObject(response.body().string());
         JSONObject json = responseBody.getJSONObject("compute");
         azureVmId = json.get("vmId").toString();
       }
