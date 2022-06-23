@@ -7,7 +7,6 @@ import io.opentelemetry.api.common.Attributes;
 import io.opentelemetry.api.common.AttributesBuilder;
 import io.opentelemetry.sdk.resources.Resource;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes;
-import io.opentelemetry.semconv.resource.attributes.ResourceAttributes.CloudPlatformValues;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +27,6 @@ public class LMLambdaResource {
 
     if (accountId != null) {
       AttributesBuilder attrBuilders = Attributes.builder();
-      attrBuilders.put(ResourceAttributes.CLOUD_PLATFORM, CloudPlatformValues.AWS_LAMBDA);
       attrBuilders.put(ResourceAttributes.CLOUD_ACCOUNT_ID, accountId);
 
       return Resource.create(attrBuilders.build(), ResourceAttributes.SCHEMA_URL);

@@ -13,7 +13,7 @@ configurations {
 dependencies {
     customShadow project(path: ":lm-agent:custom", configuration: "shadow")
     customShadow project(path: ":lm-agent:instrumentation", configuration: "shadow")
-    implementation "io.opentelemetry.javaagent:opentelemetry-javaagent:${versions.opentelemetryJavaagent}:all"
+    implementation "io.opentelemetry.javaagent:opentelemetry-javaagent:${versions.opentelemetryJavaagent}"
 }
 
 CopySpec isolateSpec() {

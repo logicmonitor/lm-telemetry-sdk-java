@@ -11,7 +11,13 @@ dependencies {
     compileOnly("io.opentelemetry:opentelemetry-sdk:${versions.opentelemetry}")
     compileOnly("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure:${versions.opentelemetryAlpha}")
     compileOnly("io.opentelemetry.javaagent:opentelemetry-javaagent-extension-api:${versions.opentelemetryJavaagentAlpha}")
-    implementation project(':otel-resource')
+    implementation (project(':otel-resource')){
+        exclude group: 'io.opentelemetry', module: 'opentelemetry-semconv'
+        exclude group: 'io.opentelemetry', module: 'opentelemetry-sdk-extension-autoconfigure'
+        exclude group: 'io.opentelemetry', module: 'opentelemetry-sdk-extension-resources'
+
+    }
+
 }
 
 tasks {

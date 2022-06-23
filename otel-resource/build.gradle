@@ -11,10 +11,13 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.2.0'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '5.0.0-alpha.9'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    api("io.opentelemetry:opentelemetry-sdk-extension-aws:${versions.opentelemetry}")
+    api("io.opentelemetry:opentelemetry-sdk-extension-aws:${versions.opentelemetry}"){
+        exclude group: 'io.opentelemetry', module: 'opentelemetry-sdk'
+        exclude group: 'io.opentelemetry', module: 'opentelemetry-api'
+    }
     api("io.opentelemetry:opentelemetry-semconv:${versions.opentelemetryAlpha}")
     implementation (group: "io.opentelemetry", name: "opentelemetry-sdk-extension-autoconfigure", version: "${versions.opentelemetryAlpha}")
     api("io.opentelemetry:opentelemetry-sdk-extension-resources:${versions.opentelemetry}")
@@ -23,10 +26,12 @@ dependencies {
     testImplementation 'com.linecorp.armeria:armeria-junit5:1.11.0'
     implementation 'com.amazonaws:aws-java-sdk-sts:1.12.148'
     testImplementation 'org.mockito:mockito-junit-jupiter:4.3.1'
-    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha0'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha0'
+
     implementation 'org.json:json:20090211'
     implementation 'com.linecorp.armeria:armeria-junit5:1.6.0'
-    testImplementation group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '3.2.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:5.0.0-alpha.9'
     testImplementation 'org.hamcrest:hamcrest:2.2'
     implementation group: 'org.junit-pioneer', name: 'junit-pioneer', version: '0.7.0'
 }

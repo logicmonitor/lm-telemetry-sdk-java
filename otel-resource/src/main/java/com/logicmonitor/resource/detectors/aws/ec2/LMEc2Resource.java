@@ -13,10 +13,6 @@ public class LMEc2Resource {
 
   private static final String ARN = "aws.arn";
 
-  private static final String CLOUD_PLATFORM = "cloud.platform";
-
-  private static final String AWS_EC2_PLATFORM = "aws_ec2";
-
   private static final Resource INSTANCE = buildResource(Ec2Resource.get());
 
   public static Resource get() {
@@ -34,7 +30,6 @@ public class LMEc2Resource {
     if (instanceId != null && region != null && accountId != null) {
       AttributesBuilder attrBuilders = Attributes.builder();
       attrBuilders.put(ARN, String.format(AWS_ARN_FORMAT, region, accountId, instanceId));
-      attrBuilders.put(CLOUD_PLATFORM, AWS_EC2_PLATFORM);
 
       return Resource.create(attrBuilders.build(), ResourceAttributes.SCHEMA_URL);
     } else {
