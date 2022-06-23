@@ -45,9 +45,6 @@ class Configuration implements ConfigProperties {
   public static Resource configureResource(ConfigProperties config) {
     Resource result = Resource.getDefault();
 
-    // TODO(anuraaga): We use a hyphen only once in this artifact, for
-    // otel.java.disabled.resource-providers. But fetching by the dot version is the simplest way
-    // to implement it for now.
     Set<String> disabledProviders =
         new HashSet<>(config.getList("otel.java.disabled.resource.providers"));
     for (ResourceProvider resourceProvider : ServiceLoader.load(ResourceProvider.class)) {
@@ -137,8 +134,6 @@ class Configuration implements ConfigProperties {
       return null;
     }
     String unitString = getUnitString(value);
-    // TODO: Environment variables have unknown encoding.  `trim()` may cut codepoints oddly
-    // but likely we'll fail for malformed unit string either way.
     String numberString = value.substring(0, value.length() - unitString.length());
     try {
       long rawNumber = Long.parseLong(numberString.trim());
@@ -204,8 +199,6 @@ class Configuration implements ConfigProperties {
               return new AbstractMap.SimpleImmutableEntry<>(
                   splitKeyValuePairs.get(0), splitKeyValuePairs.get(1));
             })
-        // If duplicate keys, prioritize later ones similar to duplicate system properties on a
-        // Java command line.
         .collect(
             Collectors.toMap(
                 Map.Entry::getKey, Map.Entry::getValue, (first, next) -> next, LinkedHashMap::new));
@@ -227,7 +220,7 @@ class Configuration implements ConfigProperties {
   /** Returns the TimeUnit associated with a unit string. Defaults to milliseconds. */
   private static TimeUnit getDurationUnit(String unitString) {
     switch (unitString) {
-      case "": // Fallthrough expected
+      case "":
       case "ms":
         return TimeUnit.MILLISECONDS;
       case "s":
@@ -252,7 +245,6 @@ class Configuration implements ConfigProperties {
       }
       lastDigitIndex -= 1;
     }
-    // Pull everything after the last digit.
     return rawValue.substring(lastDigitIndex + 1);
   }
 }
