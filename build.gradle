@@ -16,8 +16,8 @@ allprojects {
 }
 ext {
     versions = [
-            opentelemetry     : "1.6.0",
-            opentelemetryAlpha: "1.6.0-alpha",
+            opentelemetry     : "1.14.0",
+            opentelemetryAlpha: "1.14.0-alpha",
 
     ]
 }

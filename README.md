@@ -61,14 +61,14 @@ to provide resource information.
 
 List of OpenTelemetry Component Dependencies
 
-| Component                                                                                                                            | Version |
-| ---------------------------                                                                                                          | ------- |
-| [Trace API](https://github.com/open-telemetry/opentelemetry-java/tree/v1.6.0/api)                                                    | v<!--VERSION_STABLE-->1.6.0<!--/VERSION_STABLE-->  |
-| [Trace SDK](https://github.com/open-telemetry/opentelemetry-java/tree/v1.6.0/sdk)                                                    | v<!--VERSION_STABLE-->1.6.0<!--/VERSION_STABLE-->  |
-| [OpenTelemetry SDK Autoconfigure](https://github.com/open-telemetry/opentelemetry-java/tree/v1.6.0/sdk-extensions/autoconfigure)     | v<!--VERSION_ALPHA-->1.6.0-alpha<!--/VERSION_ALPHA-->  |
-| [OpenTelemetry AWS Utils](https://github.com/open-telemetry/opentelemetry-java/tree/v1.6.0/sdk-extensions/aws)                       | v<!--VERSION_STABLE-->1.6.0<!--/VERSION_STABLE-->  |
-| [OpenTelemetry Semantic Conventions](https://github.com/open-telemetry/opentelemetry-java/tree/v1.6.0/semconv)                       | v<!--VERSION_STABLE-->1.6.0<!--/VERSION_STABLE-->  |
-| [OpenTelemetry Resource Providers](https://github.com/open-telemetry/opentelemetry-java/tree/v1.6.0/sdk-extensions/resources)        | v<!--VERSION_STABLE-->1.6.0<!--/VERSION_STABLE-->  |
+| Component                                                                                                                         | Version                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| [Trace API](https://github.com/open-telemetry/opentelemetry-java/tree/v1.14.0/api)                                                | v<!--VERSION_STABLE-->1.14.0<!--/VERSION_STABLE-->     |
+| [Trace SDK](https://github.com/open-telemetry/opentelemetry-java/tree/v1.14.0/sdk)                                                | v<!--VERSION_STABLE-->1.14.0<!--/VERSION_STABLE-->     |
+| [OpenTelemetry SDK Autoconfigure](https://github.com/open-telemetry/opentelemetry-java/tree/v1.14.0/sdk-extensions/autoconfigure) | v<!--VERSION_ALPHA-->1.14.0-alpha<!--/VERSION_ALPHA--> |
+| [OpenTelemetry AWS Utils](https://github.com/open-telemetry/opentelemetry-java/tree/v1.14.0/sdk-extensions/aws)                   | v<!--VERSION_STABLE-->1.14.0<!--/VERSION_STABLE-->     |
+| [OpenTelemetry Semantic Conventions](https://github.com/open-telemetry/opentelemetry-java/tree/v1.14.0/semconv)                   | v<!--VERSION_STABLE-->1.14.0<!--/VERSION_STABLE-->     |
+| [OpenTelemetry Resource Providers](https://github.com/open-telemetry/opentelemetry-java/tree/v1.14.0/sdk-extensions/resources)    | v<!--VERSION_STABLE-->1.14.0<!--/VERSION_STABLE-->     |
 
 
 
