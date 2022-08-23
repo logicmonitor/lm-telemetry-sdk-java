@@ -33,7 +33,7 @@ public class LMAzureVMResource {
         azureVmId = json.get("vmId").toString();
       }
     } catch (Exception e) {
-      logger.error("Exception:" + e);
+      logger.warn("Exception:" + e);
     }
 
     AttributesBuilder attrBuilders = Attributes.builder();
