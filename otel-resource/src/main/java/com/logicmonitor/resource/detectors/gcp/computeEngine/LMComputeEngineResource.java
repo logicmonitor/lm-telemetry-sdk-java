@@ -48,7 +48,7 @@ public class LMComputeEngineResource {
       resource = new String(IOUtils.toByteArray(conn.getInputStream()), StandardCharsets.UTF_8);
       conn.disconnect();
     } catch (Exception e) {
-      logger.error("Exception:" + e);
+      logger.warn("Exception:" + e);
     }
     return resource;
   }
