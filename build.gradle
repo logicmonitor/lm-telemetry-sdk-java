@@ -12,7 +12,7 @@ apply from: "${scriptDir}/spotless.gradle"
 
 allprojects {
     group = "com.logicmonitor"
-    version = "0.1.0-alpha"
+    version = "0.0.1-alpha"
 }
 ext {
     versions = [
@@ -35,14 +35,6 @@ dependencies {
     api group: "io.opentelemetry", name: "opentelemetry-sdk", version: "${versions.opentelemetry}"
     implementation group: "io.opentelemetry", name: "opentelemetry-api", version: "${versions.opentelemetry}"
     api group: "io.opentelemetry", name: "opentelemetry-sdk-extension-autoconfigure", version: "${versions.opentelemetryAlpha}"
-}
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifactId = 'lm-opentelemetry-sdk'
-            from components.java
-        }
-    }
 }
 
 test {
@@ -72,4 +64,42 @@ codeCoverageReport.dependsOn {
                 }
             }.findAll();
 
+}
+
+task jarSigner {
+    doLast {
+        def passwd = System.getenv("PASSWORD")
+        def app_alias = System.getenv("ALIAS")
+        def pfx_file = System.getenv("FILE")
+        def storetype =  System.getenv("STORETYPE")
+
+        def exec_line = "jarsigner -storetype " + storetype + " -keystore " + pfx_file + " -tsa http://timestamp.comodoca.com/?td=sha256 -storepass " +
+                passwd + " -keypass "+ passwd + " " + jar.archivePath + " " + app_alias
+
+        def output=exec_line.execute()
+        output.waitFor()
+
+        println "Exit value: ${output.exitValue()}"
+        println "Output: ${output.text}"
+    }
+}
+jar.finalizedBy(jarSigner)
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'lm-telemetry-sdk'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/logicmonitor/lm-telemetry-sdk-java"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }

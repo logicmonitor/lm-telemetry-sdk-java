@@ -10,7 +10,7 @@ task copyAgentJar(type: Copy, dependsOn: [':lm-agent:agent:shadowJar']) {
 }
 
 task createlayer(type: Zip, dependsOn: ['copyAgentJar']) {
-    archiveFileName = 'lm-opentelemetry-javaagent-layer.zip'
+    archiveFileName = 'lm-telemetry-javaagent-layer.zip'
     destinationDirectory = file("$buildDir/distributions")
     def srcPath = "$buildDir/libs"
     from(srcPath) {
