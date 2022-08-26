@@ -1,4 +1,4 @@
-rootProject.name = 'lm-opentelemetry-sdk'
+rootProject.name = 'lm-telemetry-sdk-java'
 include 'otel-resource'
 include 'lm-agent'
 include 'lm-agent:custom'
