@@ -1,22 +1,39 @@
-# **LM Java OpenTelemetry SDK**
+# **LM Telemetry SDK Java**
 [![Java CI with Gradle][ci-image]][ci-url]
 [![codecov][codecov-image]][codecov-url]
 
-LM Java OpenTelemetry SDK is a wrapper around OpenTelemetry SDK. If you are using LM OpenTelemetry SDK in the application then no need to add OpenTelemetry SDK dependency as it is fetched transitively.
+LM Telemetry SDK java is a wrapper around OpenTelemetry SDK. If you are using LM Telemetry SDK in the application then no need to add OpenTelemetry SDK dependency as it is fetched transitively.
+This SDK currently detects Resources on the platforms like <br />
+- AWS Elastic Compute Cloud<br />
+- AWS Lambda<br />
+- Azure VM<br />
+- Google Cloud Compute Engine (GCE)<br />
 
-## Build
+## Getting Started
+### Auto Instrumentation
+Check [latest agent version](https://github.com/logicmonitor/lm-telemetry-sdk-java/releases/latest)
 
-`./gradlew clean build publishToMavenLocal`
+For java Auto instrumentation Logicmonitor provides lm-agent which have all Opentelemetry provided instrumentation support.<br />
 
-Above command will build the sdk and install in your local maven repository.
 
-## Use
+### Auto Instrument your app
+```java
+java -javaagent:/path/lm-telemetry-agent-<version>-alpha.jar \
+-Dotel.exporter=otlp \
+-Dotel.resource.attributes=service.namespace=<service-namespace>,service.name=<service-name> \
+-Dotel.exporter.otlp.endpoint=http://localhost:4317 \
+-Dotel.exporter.otlp.insecure=true \
+-jar <your-app-jar>
+```
 
+By default, the lm-telemetry Java agent uses OTLP exporter configured to send data to lm-otel collector at http://localhost:4317.
+### Manual Instrumentation
+Check [Github Package](https://github.com/logicmonitor/lm-telemetry-sdk-java/packages/1615817) 
 ### Gradle
 
 ```groovy
 dependencies {
-    implementation ('com.logicmonitor:lm-opentelemetry-sdk:0.1.0-alpha')
+    implementation ('com.logicmonitor:lm-telemetry-sdk:0.0.1-alpha')
 }
 ```
 
@@ -24,8 +41,8 @@ dependencies {
 ```xml
 <dependency>
         <groupId>com.logicmonitor</groupId>
-        <artifactId>lm-opentelemetry-sdk</artifactId>
-        <version>0.1.0-alpha</version>
+        <artifactId>lm-telemetry-sdk</artifactId>
+        <version>0.0.1-alpha</version>
 </dependency>
 ```
 
@@ -55,7 +72,7 @@ to provide resource information.
 | otel.resource.attributes | OTEL_RESOURCE_ATTRIBUTES | Specify resource attributes in the following format: key1=val1,key2=val2,key3=val3 |
 | otel.service.name        | OTEL_SERVICE_NAME        | Specify logical service name. Takes precedence over `service.name` defined with `otel.resource.attributes` |
 
-
+For Manual Instrumentation refer [Example](https://github.com/logicmonitor/lm-telemetry-sdk-java/tree/main/example/java-manual-instrumentation)
 
 ## OpenTelemetry Component Dependency
 

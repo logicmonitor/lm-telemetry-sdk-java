@@ -1,14 +1,19 @@
-### Java Manual instrumentation example with LM-SDK
+### Java Manual instrumentation example with lm-telemetry-sdk
 
 Import this project in your IDE.
 
-Make sure you have build and published sdk repository in your local maven before using this project.
+####Prerequisites
+Generate a personal access token for your github account with repo and read:packages scope.
+[Follow these steps.](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
+Before build set your GITHUB_USERNAME and GITHUB_TOKEN as environment variable.
 ##### Build
 ```
 ./gradlew clean build
 ```
 Export below environment variable to provide service name and custom resource attribute.
+
+For more details [refer](https://github.com/logicmonitor/lm-telemetry-sdk-java/packages/1615817)
 
 | Environment variable     | Description                                                                        |
 |--------------------------|------------------------------------------------------------------------------------|

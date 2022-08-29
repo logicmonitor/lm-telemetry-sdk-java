@@ -4,9 +4,14 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
-    mavenLocal()
+    maven {
+        credentials {
+            username = System.getenv("GITHUB_USERNAME")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+        url "https://maven.pkg.github.com/logicmonitor/lm-telemetry-sdk-java"
+    }
     mavenCentral()
-
 }
 
 dependencies {
@@ -16,19 +21,11 @@ dependencies {
     compile platform("io.opentelemetry:opentelemetry-bom:1.14.0")
     compile('io.opentelemetry:opentelemetry-api')
     //compile('io.opentelemetry:opentelemetry-sdk')
-    compile('com.logicmonitor:lm-opentelemetry-sdk:0.1.0-alpha') {
-        exclude group:"io.opentelemetry", module:"opentelemetry-sdk-extension-aws"
-    }
+    compile('com.logicmonitor:lm-telemetry-sdk:0.0.1-alpha')
     compile('io.opentelemetry:opentelemetry-exporter-otlp:1.14.0')
     compile('io.opentelemetry:opentelemetry-semconv:1.14.0-alpha')
     compile('io.grpc:grpc-netty-shaded:1.39.0')
-
-
-
-
 }
-
-
 
 jar {
     manifest {

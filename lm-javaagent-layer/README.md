@@ -1,6 +1,6 @@
 # **LM Javaagent Layer**
 
-Layer for running Java applications on AWS Lambda with LM-OpenTelemetry specific resource
+Layer for running Java applications on AWS Lambda with LM-Telemetry specific resource
 detection.
 
 ### LM-javaagent
@@ -22,7 +22,7 @@ You will get extra resource attributes using lm-javaagent layer like :
 ### Build
 `./gradlew clean build`
 
-The layer zip will be present at ` lm-javaagent-layer/build/distributions/lm-opentelemetry-javaagent-layer.zip`.
+The layer zip will be present at ` lm-javaagent-layer/build/distributions/lm-telemetry-javaagent-layer.zip`.
 Upload this zip while creating you lambda layer.
 
 To Auto-Instrument your lambda function use below environment variables
