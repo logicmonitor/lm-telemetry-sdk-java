@@ -1,4 +1,4 @@
-package com.logicmonitor.javaagent.smoketest;
+package com.logicmonitor.smoketest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

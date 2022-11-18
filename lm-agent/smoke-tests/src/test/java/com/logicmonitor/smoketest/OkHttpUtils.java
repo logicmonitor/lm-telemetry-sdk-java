@@ -1,4 +1,4 @@
-package com.logicmonitor.javaagent.smoketest;
+package com.logicmonitor.smoketest;
 
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;

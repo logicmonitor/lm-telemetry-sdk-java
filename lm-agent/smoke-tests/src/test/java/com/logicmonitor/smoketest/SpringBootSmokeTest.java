@@ -1,11 +1,8 @@
-package com.logicmonitor.javaagent.smoketest;
+package com.logicmonitor.smoketest;
 
-import io.opentelemetry.api.trace.TraceId;
 import io.opentelemetry.proto.collector.trace.v1.ExportTraceServiceRequest;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.jar.Attributes;
-import java.util.jar.JarFile;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.junit.jupiter.api.Assertions;
