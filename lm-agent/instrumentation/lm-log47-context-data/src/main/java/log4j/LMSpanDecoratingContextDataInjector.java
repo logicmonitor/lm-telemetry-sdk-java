@@ -39,9 +39,6 @@ public class LMSpanDecoratingContextDataInjector implements ContextDataInjector 
 
         String []s=Java8BytecodeBridge.currentSpan().toString().split("name=");
         StringMap newContextData = new SortedArrayStringMap(contextData);
-        newContextData.putValue(TRACE_ID, currentContext.getTraceId());
-        newContextData.putValue(SPAN_ID, currentContext.getSpanId());
-        newContextData.putValue(TRACE_FLAGS, currentContext.getTraceFlags().asHex());
         newContextData.putValue(Span_Name,s[1].substring(0,s[1].indexOf(",")));
         return newContextData;
     }
