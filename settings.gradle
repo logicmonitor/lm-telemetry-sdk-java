@@ -10,4 +10,6 @@ findProject(':lm-agent:agent')?.name = 'agent'
 include 'lm-agent:smoke-tests'
 findProject(':lm-agent:smoke-tests')?.name = 'smoke-tests'
 include 'lm-javaagent-layer'
+include 'lm-agent:instrumentation:lm-log47-context-data'
+findProject(':lm-agent:instrumentation:lm-log47-context-data')?.name = 'lm-log47-context-data'
 
