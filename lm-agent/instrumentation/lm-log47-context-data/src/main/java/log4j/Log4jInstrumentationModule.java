@@ -11,9 +11,9 @@ import static io.opentelemetry.javaagent.extension.matcher.AgentElementMatchers.
 import static java.util.Collections.singletonList;
 
 @AutoService(InstrumentationModule.class)
-public class Log4j27InstrumentationModule extends InstrumentationModule {
-    public Log4j27InstrumentationModule() {
-        super("log4j", "log4j-2.7");
+public class Log4jInstrumentationModule extends InstrumentationModule {
+    public Log4jInstrumentationModule() {
+        super("log4j-context-data", "log4j-context-data-2.7");
     }
 
     @Override
