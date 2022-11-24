@@ -10,9 +10,7 @@ repositories {
 dependencies {
     compileOnly group: 'io.opentelemetry.instrumentation', name: 'opentelemetry-log4j-2.13.2', version: '1.9.2-alpha'
     compileOnly 'org.apache.logging.log4j:log4j-core:2.19.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}//core dependency for tests..
+}
 
 test {
     useJUnitPlatform()
