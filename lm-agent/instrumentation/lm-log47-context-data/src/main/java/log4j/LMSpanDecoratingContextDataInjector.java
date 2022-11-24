@@ -2,15 +2,12 @@ package log4j;
 
 import io.opentelemetry.api.trace.SpanContext;
 import io.opentelemetry.javaagent.bootstrap.Java8BytecodeBridge;
+import java.util.List;
 import org.apache.logging.log4j.core.ContextDataInjector;
 import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.util.ReadOnlyStringMap;
 import org.apache.logging.log4j.util.SortedArrayStringMap;
 import org.apache.logging.log4j.util.StringMap;
-
-import java.util.List;
-
-import static io.opentelemetry.instrumentation.api.log.LoggingContextConstants.*;
 
 public class LMSpanDecoratingContextDataInjector implements ContextDataInjector {
     private final ContextDataInjector delegate;
