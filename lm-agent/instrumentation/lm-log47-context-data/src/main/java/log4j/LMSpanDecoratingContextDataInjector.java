@@ -1,7 +1,4 @@
-package log4j;/*
- * Copyright The OpenTelemetry Authors
- * SPDX-License-Identifier: Apache-2.0
- */
+package log4j;
 
 import io.opentelemetry.api.trace.SpanContext;
 import io.opentelemetry.javaagent.bootstrap.Java8BytecodeBridge;
