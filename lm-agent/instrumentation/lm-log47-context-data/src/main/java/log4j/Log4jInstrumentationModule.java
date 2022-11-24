@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 @AutoService(InstrumentationModule.class)
 public class Log4jInstrumentationModule extends InstrumentationModule {
     public Log4jInstrumentationModule() {
-        super("log4j-context-data", "log4j-context-data-2.7");
+        super("log4j-context-data", "log4j-context-data-2.19");
     }
 
     @Override
@@ -25,10 +25,5 @@ public class Log4jInstrumentationModule extends InstrumentationModule {
     public List<String> getAdditionalHelperClassNames() {
         return singletonList(
                 "log4j.LMSpanDecoratingContextDataInjector");
-    }
-
-    @Override
-    public ElementMatcher.Junction<ClassLoader> classLoaderMatcher() {
-        return hasClassesNamed("org.apache.logging.log4j.core.impl.ContextDataInjectorFactory");
     }
 }
