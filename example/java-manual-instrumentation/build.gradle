@@ -17,13 +17,13 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    implementation 'io.opentelemetry:opentelemetry-sdk-extension-aws:1.14.0'
-    compile platform("io.opentelemetry:opentelemetry-bom:1.14.0")
+    implementation 'io.opentelemetry.contrib:opentelemetry-aws-resources:1.20.1-alpha'
+    compile platform("io.opentelemetry:opentelemetry-bom:1.20.1")
     compile('io.opentelemetry:opentelemetry-api')
     //compile('io.opentelemetry:opentelemetry-sdk')
     compile('com.logicmonitor:lm-telemetry-sdk:0.0.1-alpha')
-    compile('io.opentelemetry:opentelemetry-exporter-otlp:1.14.0')
-    compile('io.opentelemetry:opentelemetry-semconv:1.14.0-alpha')
+    compile('io.opentelemetry:opentelemetry-exporter-otlp:1.20.1')
+    compile('io.opentelemetry:opentelemetry-semconv:1.20.1-alpha')
     compile('io.grpc:grpc-netty-shaded:1.39.0')
 }
 

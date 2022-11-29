@@ -12,12 +12,12 @@ apply from: "${scriptDir}/spotless.gradle"
 
 allprojects {
     group = "com.logicmonitor"
-    version = "0.0.1-alpha"
+    version = "0.0.4-alpha"
 }
 ext {
     versions = [
-            opentelemetry     : "1.14.0",
-            opentelemetryAlpha: "1.14.0-alpha",
+            opentelemetry     : "1.20.1",
+            opentelemetryAlpha: "1.20.1-alpha",
 
     ]
 }

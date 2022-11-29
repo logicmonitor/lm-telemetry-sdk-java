@@ -9,8 +9,8 @@ subprojects {
                 opentelemetry              : "1.20.1",
 
                 // these lines are managed by .github/scripts/update-version.sh
-                opentelemetryJavaagent     : "1.20.0",
-                opentelemetryJavaagentAlpha: "1.20.0-alpha",
+                opentelemetryJavaagent     : "1.20.1",
+                opentelemetryJavaagentAlpha: "1.20.1-alpha",
 
                 bytebuddy                  : "1.12.18",
                 autoservice                : "1.0.1",
