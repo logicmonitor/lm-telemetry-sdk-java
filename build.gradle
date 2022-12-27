@@ -12,7 +12,7 @@ apply from: "${scriptDir}/spotless.gradle"
 
 allprojects {
     group = "com.logicmonitor"
-    version = "0.0.1-alpha"
+    version = "0.0.4-alpha"
 }
 ext {
     versions = [
