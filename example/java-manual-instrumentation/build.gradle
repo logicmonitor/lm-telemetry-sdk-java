@@ -21,7 +21,7 @@ dependencies {
     compile platform("io.opentelemetry:opentelemetry-bom:1.14.0")
     compile('io.opentelemetry:opentelemetry-api')
     //compile('io.opentelemetry:opentelemetry-sdk')
-    compile('com.logicmonitor:lm-telemetry-sdk:0.0.1-alpha')
+    compile('com.logicmonitor:lm-telemetry-sdk:0.0.4-alpha')
     compile('io.opentelemetry:opentelemetry-exporter-otlp:1.14.0')
     compile('io.opentelemetry:opentelemetry-semconv:1.14.0-alpha')
     compile('io.grpc:grpc-netty-shaded:1.39.0')
