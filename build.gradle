@@ -103,3 +103,10 @@ publishing {
         }
     }
 }
+
+task copyToLib( type: Copy ) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    into "$buildDir/extra-libs"
+    from configurations.runtimeClasspath
+}
+jar { dependsOn copyToLib }

@@ -20,8 +20,9 @@ dependencies {
     }
     api("io.opentelemetry:opentelemetry-semconv:${versions.opentelemetryAlpha}")
     implementation (group: "io.opentelemetry", name: "opentelemetry-sdk-extension-autoconfigure", version: "${versions.opentelemetryAlpha}")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.12.3")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.3")
+    api("io.opentelemetry:opentelemetry-sdk-extension-resources:${versions.opentelemetry}")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
     testImplementation 'com.linecorp.armeria:armeria-junit5:1.11.0'
     implementation 'com.amazonaws:aws-java-sdk-sts:1.12.148'
     testImplementation 'org.mockito:mockito-junit-jupiter:4.3.1'
