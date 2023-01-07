@@ -27,7 +27,7 @@ jobs:
     - name: Run coverage
       env:
         GITHUB_USERNAME: ${{ secrets.REPO_GITHUB_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.REPO_GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./gradlew clean codeCoverageReport
 
       # Runs a set of commands using the runners shell
@@ -43,5 +43,5 @@ jobs:
     - name: Build with Gradle
       env:
         GITHUB_USERNAME: ${{ secrets.REPO_GITHUB_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.REPO_GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./gradlew build

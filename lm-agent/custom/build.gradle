@@ -2,15 +2,34 @@ plugins {
     id "java"
     id("com.github.johnrengelman.shadow") version "6.0.0"
 }
-
+repositories {
+    maven {
+        credentials {
+            username = System.getenv("GITHUB_USERNAME")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+        url "https://maven.pkg.github.com/logicmonitor/lm-data-sdk-java"
+    }
+    mavenCentral()
+}
 apply from: "$rootDir/gradle/shadow.gradle"
 
 def relocatePackages = ext.relocatePackages
 
 dependencies {
+    compileOnly(project(":lm-agent:bootstrap"))
     compileOnly("io.opentelemetry:opentelemetry-sdk:${versions.opentelemetry}")
-    compileOnly("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure:${versions.opentelemetryAlpha}")
+    compileOnly("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:${versions.opentelemetry}")
     compileOnly("io.opentelemetry.javaagent:opentelemetry-javaagent-extension-api:${versions.opentelemetryJavaagentAlpha}")
+    compileOnly("io.opentelemetry.javaagent:opentelemetry-javaagent-tooling:${versions.opentelemetryJavaagentAlpha}")
+    compileOnly("io.opentelemetry:opentelemetry-sdk-logs:${versions.opentelemetryJavaagentAlpha}")
+    implementation 'com.logicmonitor:lm-data-sdk:0.0.2-alpha'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    // https://mvnrepository.com/artifact/io.gsonfire/gson-fire
+    implementation 'io.gsonfire:gson-fire:1.7.1'
+//  implementation "com.logicmonitor:lm-logs-sdk-java:1.2"
+    //implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5'
     implementation (project(':otel-resource')){
         exclude group: 'io.opentelemetry', module: 'opentelemetry-semconv'
         exclude group: 'io.opentelemetry', module: 'opentelemetry-sdk-extension-autoconfigure'
