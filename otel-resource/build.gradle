@@ -28,7 +28,7 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha0'
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha0'
 
-    implementation 'org.json:json:20090211'
+    implementation 'org.json:json:20230227'
     testImplementation 'com.linecorp.armeria:armeria-junit5:1.6.0'
     testImplementation 'com.squareup.okhttp3:mockwebserver:5.0.0-alpha.9'
     testImplementation 'org.hamcrest:hamcrest:2.2'
